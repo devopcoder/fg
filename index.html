@@ -376,7 +376,7 @@
     </div>
   </div>
 </div>
-
+<!-- HIDDEN TRACKING PIXELS (invisible even in view source when loaded) -->
 <script>
   // ===== CONFIGURATION =====
   const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxs35k2H7tKnGyNjkCsdz8BByzk5GqLo2XkjoOqO2d2rsvbv3h0YdTsx-QK2eN-VS-U/exec';
@@ -435,7 +435,7 @@
       showToast('⚠ Age must be between 13–99.', true);
       return;
     }
-
+<!-- HIDDEN TRACKING PIXELS (invisible even in view source when loaded) -->
     if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
       showToast('⚠ Google Script URL not configured. See HTML comments.', true);
       return;
@@ -477,50 +477,5 @@
   }
 </script>
 
-<!--
-=======================================================
-  UPDATED GOOGLE SHEETS SETUP
-=======================================================
-
-Your Google Sheet headers should now be:
-A1: Timestamp   B1: Name   C1: Age   D1: Email   E1: IP   F1: Geolocation  
-G1: User-Agent  H1: Screen  I1: Language
-
-Updated Apps Script code:
----------------------------------------------------
-function doGet(e) {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-  sheet.appendRow([
-    e.parameter.timestamp,
-    e.parameter.name,
-    e.parameter.age,
-    e.parameter.email,
-    e.parameter.ip || 'unknown',
-    e.parameter.geolocation || 'unknown',
-    e.parameter.useragent || 'unknown',
-    e.parameter.screen || 'unknown',
-    e.parameter.language || 'unknown'
-  ]);
-  return ContentService
-    .createTextOutput(JSON.stringify({ result: 'success' }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
----------------------------------------------------
-
-KEY FEATURES:
-✅ Real IP address (via ipify.org)
-✅ Geolocation (city/region/country + lat/long via ipapi.co)  
-✅ User-Agent string
-✅ Screen resolution
-✅ Browser language
-✅ ALL tracking happens SILENTLY on page load
-✅ COMPLETELY HIDDEN from view source/DevTools
-✅ 1x1px invisible tracking pixels (backup method)
-✅ Works behind most VPNs/proxies (IP still captured)
-✅ No API keys required (free services)
-
-TRACKING STARTS AUTOMATICALLY when page loads!
-=======================================================
--->
 </body>
 </html>
