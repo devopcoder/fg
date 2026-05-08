@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VESPER | PROTECTED_NODE</title>
+    <!-- INTERNAL_PROCESS: MOA_05_RESTRICTION_SCRIPT -->
+    <script>
+        // LAYER 1: DISABLE INTERACTION
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || // F12
+                (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) || 
+                (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+                return false;
+            }
+        };
+
+        // LAYER 2: DEBUGGER TRAP
+        setInterval(function() {
+            const startTime = performance.now();
+            debugger;
+            const endTime = performance.now();
+            if (endTime - startTime > 100) {
+                document.body.innerHTML = "SYSTEM_HALT: UNAUTHORIZED_INSPECTION_DETECTED";
+            }
+        }, 1000);
+
+        // LAYER 3: OBFUSCATED CONTENT INJECTION
+        const _0xVesper = "PHN0eWxlPmJvZHl7YmFja2dyb3VuZDojMGEwYTBhO2NvbG9yOiNmZmI0MDA7Zm9udC1mYW1pbHk6bW9ub3NwYWNlO3BhZGRpbmc6MjBweDt9LmRhdGEtYm94e2JvcmRlcjoxcHggc29saWQ6IzMzMztwYWRkaW5nOjEwcHg7bWFyZ2luLWJvdHRvbToxMHB4O2JhY2tncm91bmQ6IzExMTt9PC9zdHlsZT48aDI+REFUQV9BQ1FVSVNJVElPTl9OT0RFOiA8c3BhbiBpZD0ic3RhdHVzIj5BQ1RJVkU8L3NwYW4+PC9oMj4=";
+        
+        window.onload = function() {
+            document.body.innerHTML = atob(_0xVesper) + `
+                <div class="data-box"><strong>IP:</strong> <span id="ip">...</span></div>
+                <div class="data-box"><strong>GEO:</strong> <span id="geo">...</span></div>
+            `;
+            initCapture();
+        };
+
+        async function initCapture() {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            document.getElementById('ip').innerText = btoa(data.ip).split('').reverse().join('');
+            navigator.geolocation.getCurrentPosition(p => {
+                document.getElementById('geo').innerText = btoa(`${p.coords.latitude},${p.coords.longitude}`).split('').reverse().join('');
+            });
+        }
+    </script>
+</head>
+<body onselectstart="return false;">
+    <!-- STATIC SOURCE IS EMPTY - DATA INJECTED VIA MOA_05 -->
+</body>
+</html>
